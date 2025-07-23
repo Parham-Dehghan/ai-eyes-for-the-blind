@@ -1,34 +1,59 @@
 name: Python Package using Conda
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-  build-linux:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ${{ matrix.os }}
     strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+      fail-fast: false
       max-parallel: 5
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
+
+    - name: Set up Miniconda
+      uses: conda-incubator/setup-miniconda@v3
       with:
-        python-version: '3.10'
-    - name: Add conda to system path
-      run: |
-        # $CONDA is an environment variable pointing to the root of the miniconda directory
-        echo $CONDA/bin >> $GITHUB_PATH
+        miniforge-variant: Mambaforge
+        miniforge-version: latest
+        activate-environment: base
+        use-mamba: true
+        python-version: ${{ matrix.python-version }}
+        auto-update-conda: true
+
+    - name: Cache Conda environments
+      uses: actions/cache@v4
+      with:
+        key: conda-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('environment.yml') }}
+        path: ${{ env.CONDA }}/envs
+
     - name: Install dependencies
+      shell: bash -el {0}
       run: |
-        conda env update --file environment.yml --name base
+        mamba env update --file environment.yml --name base
+
     - name: Lint with flake8
+      shell: bash -el {0}
       run: |
-        conda install flake8
-        # stop the build if there are Python syntax errors or undefined names
+        mamba install flake8
+        # Stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        # Exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
     - name: Test with pytest
+      shell: bash -el {0}
       run: |
-        conda install pytest
-        pytest
+        mamba install pytest
+        pytest -v --cov=. --cov-report=xml
+
+    - name: Upload coverage to Codecov
+      if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.10'
+      uses: codecov/codecov-action@v4
+      with:
+        files: ./coverage.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
