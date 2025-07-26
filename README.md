@@ -27,9 +27,9 @@ This repository provides three AI-powered applications designed to empower indiv
 ### 🧠 System Workflow
 ```mermaid
 flowchart TD
-    Input[User Types Message] --> Config[Configure Voice Settings<br>(Language, Pitch, Speed)]
+    Input[User Types Message] --> Config[Configure Voice Settings\n(Language, Pitch, Speed)]
     Config --> Process[Preprocess Text]
-    Process --> Engine[Select TTS Engine<br>(e.g., gTTS, Tortoise)]
+    Process --> Engine[Select TTS Engine\n(e.g., gTTS, Tortoise)]
     Engine --> Output[Audio Playback]
     Output -->|Adjust Settings| Config
 ```
@@ -64,12 +64,12 @@ python polyvoice_main.py
 ### 🧠 System Workflow
 ```mermaid
 flowchart TD
-    Start[Start Conversation] --> Config[Customize Interface<br>(Font, Colors, Layout)]
+    Start[Start Conversation] --> Config[Customize Interface\n(Font, Colors, Layout)]
     Config --> Mic[Microphone Input]
-    Mic --> ASR[ASR Engine<br>(Speech-to-Text)]
+    Mic --> ASR[ASR Engine\n(Speech-to-Text)]
     ASR --> Display[Display Text on Screen]
     Display --> Type[User Types Response]
-    Type --> TTS[TTS Engine<br>(Text-to-Speech)]
+    Type --> TTS[TTS Engine\n(Text-to-Speech)]
     TTS --> Speaker[Speaker Output]
     Speaker -->|Continue Conversation| Mic
 ```
@@ -108,9 +108,9 @@ flowchart TD
     Start[Launch App] --> Mode{Select Mode: Blind or Deaf}
     Mode -->|Blind| Cam[Capture via Camera]
     Mode -->|Deaf| Cam
-    Cam --> Vision[AI Analysis<br>(Object Detection, OCR, Scene Description)]
+    Cam --> Vision[AI Analysis\n(Object Detection, OCR, Scene Description)]
     Vision -->|Blind| Audio[TTS Voice Output]
-    Vision -->|Deaf| Output[Text Summary + Visual UI<br>+ Optional Vibration Alerts]
+    Vision -->|Deaf| Output[Text Summary + Visual UI\n+ Optional Vibration Alerts]
     Output -->|User Feedback| Cam
     Audio -->|User Feedback| Cam
 ```
