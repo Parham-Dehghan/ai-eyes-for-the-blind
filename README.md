@@ -182,7 +182,7 @@ We welcome contributions from developers, designers, accessibility researchers, 
 | Name | Mohammad Parham Dehghan |
 |------|-------------------------|
 | **Email** | dehghanparham6@gmail.com |
-| **YouTube** | [AI Accessibility Projects & Demos](https://youtube.com) |
+| **YouTube** | [AI Accessibility Projects & Demos](https://www.youtube.com/@dehghanparham6) |
 | **GitHub** | [@Parham-Dehghan](https://github.com/Parham-Dehghan) |
 
 ---
