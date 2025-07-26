@@ -1,51 +1,68 @@
-🧠 AI Accessibility Suite – PolyVoice, Real-Time Communication, and md
-This repository includes three AI-powered applications developed to support people with speech, hearing, and vision impairments. These tools were designed with accessibility, inclusiveness, and real-world usability in mind.
+# 🧠 AI Accessibility Suite – PolyVoice, Real-Time Communication, and md
 
-🗣️ PolyVoice: Text-to-Speech for Non-Verbal and Mute Users
-PolyVoice is a user-friendly and highly accessible text-to-speech application specifically designed for individuals who are unable to speak due to physical or medical conditions. The tool empowers users by enabling them to convert written text into spoken voice in real time.
-🔧 Key Features:
+![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg) ![Status: Active](https://img.shields.io/badge/Status-Active-green.svg)
 
-Text-to-Speech Conversion: Converts typed text into natural-sounding audio using AI-based engines.
-Multilingual Support: Supports various languages and accents.
-Custom Voice Settings: Users can select male/female voice tones, control pitch and speed.
-Offline Mode: Optionally available for areas without internet connectivity.
-Emotion Synthesis (optional): Enhance spoken feedback with emotions (e.g., happy, sad).
+This repository provides three AI-powered applications designed to empower individuals with **speech**, **hearing**, and **vision** impairments. Built with accessibility, inclusiveness, and real-world usability in mind, these tools aim to bridge communication gaps and enhance independence.
 
-🧑‍🤝‍🧑 Target Audience:
+---
 
-People who are mute or have speech impairments (e.g., ALS, stroke, autism).
-Therapists and caregivers aiding communication.
-Users in temporary voice loss situations.
+## 🗣️ PolyVoice: Text-to-Speech for Non-Verbal and Mute Users
 
-🧠 System Workflow:
+**PolyVoice** is a user-friendly text-to-speech application tailored for individuals unable to speak due to physical or medical conditions, enabling real-time conversion of typed text into natural-sounding speech.
+
+### 🔧 Key Features
+| Feature | Description |
+|---------|-------------|
+| **Text-to-Speech Conversion** | Converts typed text into natural audio using AI-based engines (e.g., gTTS, Tortoise). |
+| **Multilingual Support** | Supports multiple languages and accents for global accessibility. |
+| **Custom Voice Settings** | Allows selection of male/female tones, pitch, and speed adjustments. |
+| **Offline Mode** | Optional functionality for use without internet connectivity. |
+| **Emotion Synthesis** | Optional feature to add emotional tones (e.g., happy, sad) to speech. |
+
+### 🧑‍🤝‍🧑 Target Audience
+- Individuals with speech impairments (e.g., ALS, stroke, autism).
+- Therapists and caregivers facilitating communication.
+- Users experiencing temporary voice loss.
+
+### 🧠 System Workflow
+```mermaid
 flowchart TD
     Input[User Types Message] --> Config[Configure Voice Settings<br>(Language, Pitch, Speed)]
     Config --> Process[Preprocess Text]
     Process --> Engine[Select TTS Engine<br>(e.g., gTTS, Tortoise)]
     Engine --> Output[Audio Playback]
     Output -->|Adjust Settings| Config
+```
 
-💻 How to Run:
+**Flowchart Description**: The PolyVoice flowchart is a linear diagram with a feedback loop, rendered as a top-down sequence of rectangular nodes connected by arrows. It starts with a node labeled "User Types Message," flowing to "Configure Voice Settings (Language, Pitch, Speed)," then to "Preprocess Text," followed by "Select TTS Engine (e.g., gTTS, Tortoise)," and finally to "Audio Playback." A dashed arrow labeled "Adjust Settings" loops back from "Audio Playback" to "Configure Voice Settings," indicating the user can refine settings after playback. The nodes are styled with rounded corners and a light background, typical of Mermaid’s default rendering on GitHub.
+
+### 💻 How to Run
+```bash
 pip install -r requirements.txt
 python polyvoice_main.py
+```
 
+---
 
-🔁 Real-Time Communication: Speech ↔ Text Interface
-Real-Time Communication bridges communication between deaf or mute individuals and hearing people by providing an interface to convert speech into text and typed text into speech on the fly.
-🔧 Key Features:
+## 🔁 Real-Time Communication: Speech ↔ Text Interface
 
-Speech Recognition (ASR): Converts speech to text instantly using Whisper or other ASR models.
-Text-to-Speech Output: Converts typed responses into spoken language.
-Custom Interfaces: Font size, color themes, and layout customization for visibility.
-Microphone and Speaker Integration: Designed for real-time conversations.
+**Real-Time Communication** enables seamless interaction between deaf or mute individuals and hearing people by converting speech to text and typed text to speech in real time.
 
-🧑‍🤝‍🧑 Target Audience:
+### 🔧 Key Features
+| Feature | Description |
+|---------|-------------|
+| **Speech Recognition (ASR)** | Instantly converts speech to text using Whisper or other ASR models. |
+| **Text-to-Speech Output** | Converts typed responses into spoken language. |
+| **Custom Interfaces** | Adjustable font size, color themes, and layouts for enhanced visibility. |
+| **Microphone & Speaker Integration** | Optimized for real-time conversational use. |
 
-People who are deaf, hard of hearing, or mute.
-Public service desks (banks, clinics) for inclusive communication.
-Educators and interpreters.
+### 🧑‍🤝‍🧑 Target Audience
+- Deaf, hard-of-hearing, or mute individuals.
+- Public service desks (e.g., banks, clinics) for inclusive communication.
+- Educators and interpreters.
 
-🧠 System Workflow:
+### 🧠 System Workflow
+```mermaid
 flowchart TD
     Start[Start Conversation] --> Config[Customize Interface<br>(Font, Colors, Layout)]
     Config --> Mic[Microphone Input]
@@ -55,33 +72,38 @@ flowchart TD
     Type --> TTS[TTS Engine<br>(Text-to-Speech)]
     TTS --> Speaker[Speaker Output]
     Speaker -->|Continue Conversation| Mic
+```
 
-💻 How to Run:
+**Flowchart Description**: The Real-Time Communication flowchart is a cyclical diagram, rendered top-down with rectangular nodes and arrows. It begins with "Start Conversation," leading to "Customize Interface (Font, Colors, Layout)," then to "Microphone Input," followed by "ASR Engine (Speech-to-Text)," "Display Text on Screen," "User Types Response," "TTS Engine (Text-to-Speech)," and "Speaker Output." A dashed arrow labeled "Continue Conversation" loops back from "Speaker Output" to "Microphone Input," representing the ongoing conversational cycle. The nodes have rounded corners, with text centered and arrows clearly indicating flow direction.
+
+### 💻 How to Run
+```bash
 pip install -r requirements.txt
 python real_time_main.py
+```
 
+---
 
-🤖 md: AI Assistant for the Blind and Deaf
-md (Multi-Disability Assistant) is an intelligent assistant tailored for both blind and deaf users. It uses real-time camera input, object detection, OCR, and AI description generation to explain the environment visually or through audio.
-🔧 Key Features:
+## 🤖 md: AI Assistant for the Blind and Deaf
 
-Dual Mode (Blind / Deaf): Select mode on startup based on user needs.
-Object Detection: Uses AI models (YOLO/SSD) to identify people, objects, and obstacles.
-Text Recognition (OCR): Reads and interprets signs, books, handwritten or printed content.
-Scene Description: Describes complex scenes using advanced vision models.
-Multi-Output Interface:
-For Blind Users: Audio narration via TTS.
-For Deaf Users: On-screen readable text with optional vibration alerts.
+**md** (Multi-Disability Assistant) is an intelligent assistant for **blind and deaf users**, using real-time camera input, object detection, OCR, and AI to describe environments via audio or text.
 
+### 🔧 Key Features
+| Feature | Description |
+|---------|-------------|
+| **Dual Mode (Blind/Deaf)** | Selectable mode for blind or deaf users on startup. |
+| **Object Detection** | Identifies people, objects, and obstacles using YOLO/SSD models. |
+| **Text Recognition (OCR)** | Reads signs, books, and handwritten or printed content. |
+| **Scene Description** | Generates detailed descriptions of complex scenes. |
+| **Multi-Output Interface** | Audio narration (TTS) for blind users; text and vibration alerts for deaf users. |
 
+### 🧑‍🤝‍🧑 Target Audience
+- Blind or low-vision users needing contextual feedback.
+- Deaf users requiring visual alerts or text summaries.
+- Public assistive installations and wearable devices.
 
-🧑‍🤝‍🧑 Target Audience:
-
-Blind or low-vision users seeking contextual feedback.
-Deaf users who require visual alerts or text summaries.
-Public assistive installations, wearable devices.
-
-🧠 System Workflow:
+### 🧠 System Workflow
+```mermaid
 flowchart TD
     Start[Launch App] --> Mode{Select Mode: Blind or Deaf}
     Mode -->|Blind| Cam[Capture via Camera]
@@ -91,13 +113,21 @@ flowchart TD
     Vision -->|Deaf| Output[Text Summary + Visual UI<br>+ Optional Vibration Alerts]
     Output -->|User Feedback| Cam
     Audio -->|User Feedback| Cam
+```
 
-💻 How to Run:
+**Flowchart Description**: The md flowchart is a branching diagram, rendered top-down with a decision node and parallel paths. It starts with "Launch App," leading to a diamond-shaped decision node "Select Mode: Blind or Deaf." Two arrows branch out: one labeled "Blind" and one labeled "Deaf," both pointing to a shared "Capture via Camera" node. This flows to "AI Analysis (Object Detection, OCR, Scene Description)." From there, two paths diverge: the "Blind" path leads to "TTS Voice Output," and the "Deaf" path leads to "Text Summary + Visual UI + Optional Vibration Alerts." Dashed arrows labeled "User Feedback" loop back from both output nodes to "Capture via Camera," indicating continuous interaction. Nodes are styled with rounded corners (rectangular) or diamonds (decision), with clear labels and arrows.
+
+### 💻 How to Run
+```bash
 pip install -r requirements.txt
 python md.py
+```
 
+---
 
-📁 Project Structure
+## 📁 Project Structure
+
+```
 ai-accessibility-suite/
 │
 ├── polyvoice_main.py         # PolyVoice app
@@ -107,44 +137,58 @@ ai-accessibility-suite/
 ├── README.md
 └── assets/
     └── screenshots/
+```
 
-
-🔐 Accessibility Principles Followed
-
-WCAG Compliance: Designed with high contrast and readable fonts.
-Voice-free Interaction: Fully usable without audio in Deaf Mode.
-Large Buttons and Simple UI: Suitable for low-vision or elderly users.
-No Mouse Needed: All features keyboard accessible.
-
-
-📜 License
-All content is provided under the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license.
-
-💡 Future Features (Planned)
-
- Sign language recognition and feedback
- Braille printer integration
- Mobile app versions for Android/iOS
- Cloud data sharing for caregivers
-
-
-🙌 Contribution
-We welcome contributions from developers, designers, accessibility researchers, and community members. Please submit issues or pull requests on GitHub.
-
-
-Designed to empower communication for all – regardless of ability. 🌍
-
-
-👨‍💻 Creator Information
-
-Name: mohammad parham dehghan
-Email: dehghanparham6@gmail.com  
-YouTube Channel: AI Accessibility Projects & Demos  
-GitHub: @Parham-Dehghan
-
-
-📜 License
-This project is licensed under:
-Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)You are free to share and adapt the material for non-commercial purposes with proper attribution.
-For more information, visit: creativecommons.org/licenses/by-nc/4.0
 ---
+
+## 🔐 Accessibility Principles
+
+- **WCAG Compliance**: High-contrast design with readable fonts.
+- **Voice-Free Interaction**: Fully usable without audio in Deaf Mode.
+- **Large Buttons & Simple UI**: Suitable for low-vision or elderly users.
+- **Keyboard Accessibility**: All features navigable without a mouse.
+
+---
+
+## 📜 License
+
+![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg)
+
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**. You are free to share and adapt the material for non-commercial purposes with proper attribution.
+
+🔗 [License Details](https://creativecommons.org/licenses/by-nc/4.0/)
+
+---
+
+## 💡 Future Features (Planned)
+
+- [ ] Sign language recognition and feedback
+- [ ] Braille printer integration
+- [ ] Mobile app versions for Android/iOS
+- [ ] Cloud data sharing for caregivers
+
+---
+
+## 🙌 Contribution
+
+We welcome contributions from developers, designers, accessibility researchers, and community members. Please submit issues or pull requests on [GitHub](https://github.com/Parham-Dehghan).
+
+> **Designed to empower communication for all – regardless of ability.** 🌍
+
+---
+
+## 👨‍💻 Creator Information
+
+| Name | Mohammad Parham Dehghan |
+|------|-------------------------|
+| **Email** | dehghanparham6@gmail.com |
+| **YouTube** | [AI Accessibility Projects & Demos](https://youtube.com) |
+| **GitHub** | [@Parham-Dehghan](https://github.com/Parham-Dehghan) |
+
+---
+
+## 📜 License (Repeated for Clarity)
+
+![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg)
+
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**. For more details, visit [creativecommons.org/licenses/by-nc/4.0](https://creativecommons.org/licenses/by-nc/4.0/).
