@@ -1,206 +1,178 @@
 
-# 👁️‍🗨️ md – AI Assistant for the Blind and Hearing-Impaired
+# 🧠 AI Accessibility Suite – PolyVoice, Real-Time Communication, and md
 
-**md** is an intelligent assistant designed to help blind and hearing-impaired individuals. This repository contains a set of intelligent tools based on artificial intelligence designed to support blind and hearing-impaired individuals. The projects include real-time obstacle detection, multilingual text-to-speech (TTS), and a comprehensive "AI Eye" system using models like YOLO, BLIP, MiDaS, and Gemma.
+This repository includes three AI-powered applications developed to support people with **speech**, **hearing**, and **vision** impairments. These tools were designed with accessibility, inclusiveness, and real-world usability in mind.
 
 ---
 
-## 📁 Project Overview
+## 🗣️ PolyVoice: Text-to-Speech for Non-Verbal and Mute Users
 
-### 1. 🔍 Real-Time Obstacle Detection – `Real Time.ipynb`
+**PolyVoice** is a user-friendly and highly accessible text-to-speech application specifically designed for individuals who are unable to speak due to physical or medical conditions. The tool empowers users by enabling them to convert written text into spoken voice in real time.
 
-A Flask-based application using mobile or laptop cameras for real-time object detection, distance estimation, and audio alerts.
+### 🔧 Key Features:
+- **Text-to-Speech Conversion:** Converts typed text into natural-sounding audio using AI-based engines.
+- **Multilingual Support:** Supports various languages and accents.
+- **Custom Voice Settings:** Users can select male/female voice tones, control pitch and speed.
+- **Offline Mode:** Optionally available for areas without internet connectivity.
+- **Emotion Synthesis (optional):** Enhance spoken feedback with emotions (e.g., happy, sad).
 
-#### ✅ Features
-- Detects objects like walls, chairs, people, cars, etc.
-- Estimates distance using YOLOv8.
-- Issues audio alerts when obstacles are close.
-- Saves processed video frames.
-- Supports front/rear mobile cameras.
+### 🧑‍🤝‍🧑 Target Audience:
+- People who are mute or have speech impairments (e.g., ALS, stroke, autism).
+- Therapists and caregivers aiding communication.
+- Users in temporary voice loss situations.
 
-#### 🧪 How to Run
-```bash
-pip install flask flask-socketio eventlet opencv-python-headless ultralytics gtts pyngrok requests
-python app.py
-```
-
-#### 📊 Flowchart
+### 🧠 System Workflow:
 ```mermaid
 flowchart TD
-    A[Start Flask Application] --> B[Connect to ngrok]
-    B --> C[Load YOLO Model]
-    C --> D[Receive Frame]
-    D --> E[Detect Objects]
-    E --> F[Estimate Distance + Alert]
-    F --> G[Save Video]
-    G --> H[Send Frame to Client]
+    Input[User Types Message] --> Process[Preprocess Text]
+    Process --> Engine[TTS Engine (gTTS / Tortoise)]
+    Engine --> Output[Audio Playback]
 ```
 
----
-
-### 2. 🗣️ PolyVoice Multilingual TTS – `PolyVoice.ipynb`
-
-A beautiful web-based app for converting text into speech in multiple languages using gTTS.
-
-#### ✅ Features
-- Supports 8 languages: English, Persian, French, German, Arabic, Italian, Russian, Spanish.
-- Normal and slow speed options.
-- Generates and plays MP3 files.
-- Automatically deletes old files.
-
-#### 🧪 How to Run
-```bash
-pip install flask werkzeug gtts pyngrok
-```
-
-#### 📊 Flowchart
-```mermaid
-flowchart TD
-    A[Start Flask App] --> B[Connect to ngrok]
-    B --> C[User Inputs Text]
-    C --> D[User Chooses Language & Speed]
-    D --> E[Generate MP3 via gTTS]
-    E --> F[Play or Return Error]
-```
-
----
-
-### 3. 🧠 AI Eye for the Blind – `ai_eyes_for_the_blind_google_gemma_3n_impact_challenge.ipynb`
-
-An advanced system that describes scenes, reads text, estimates depth, and produces audio feedback using state-of-the-art AI models.
-
-#### ✅ Features
-- Scene captioning with BLIP and simplification using Gemma.
-- Object detection using YOLO.
-- Depth estimation using MiDaS.
-- OCR text reading using Doctr.
-- Speech-to-text with Whisper.
-- Supports input types: image, video, audio, text.
-
-#### 🧪 How to Run
-```bash
-pip install numpy ultralytics flask transformers pillow gTTS speechrecognition pycocotools pyngrok opencv-python geocoder flask-cors pytesseract python-doctr
-```
-
-#### 📊 Flowchart
-```mermaid
-flowchart TD
-    A[Start Flask App] --> B[Connect to ngrok]
-    B --> C[Input: Image/Video/Audio/Text]
-    C --> D{Input Type?}
-    D -->|Image| E[YOLO + BLIP + MiDaS]
-    D -->|Video| F[Whisper + Frame Analysis]
-    D -->|Audio| G[Whisper → Text → Gemma]
-    D -->|Text| H[gTTS]
-    E --> I[Audio + Description]
-    F --> I
-    G --> I
-    H --> I
-    I --> J[Output to User]
-```
-
----
-
-## ⚙️ Requirements
-- Python 3.8 or higher
-- GPU (optional but recommended for performance)
-- Hugging Face token (for BLIP and Gemma models)
-
-## 📦 General Installation
-```bash
-git clone https://github.com/parhamdehghan/ai-assistive-tools.git
-cd ai-assistive-tools
-```
-
-## 📽️ Demos
-Demo videos are available in the `demos/` folder or via YouTube for easier access:
-
-▶️ [Watch Demo on YouTube](https://youtu.be/abc123) *(Replace with actual link)*
-
----
-
-## 🪪 License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-## 📬 Contact
-**Developer**: Parham Dehghan  
-**Email**: dehghanparham6@gmail.com
-
-
-
-# AI Eyes for the Blind
-
-A powerful, real-time assistive system for blind and deaf individuals, using AI models like Gemma 2B, YOLOv8, BLIP, and MiDaS.
-
-## 🔍 What it does
-- Describes surroundings using **BLIP**
-- Simplifies descriptions for accessibility with **Google Gemma**
-- Detects objects and directions with **YOLOv8n**
-- Estimates obstacle distances with **MiDaS**
-- Converts output to speech via **gTTS**
-- Supports video and image inputs
-- Designed for visually impaired and hearing-impaired users
-
-## 🧠 Technologies Used
-- **Gemma 2B** – Language simplification
-- **YOLOv8n** – Real-time object detection
-- **BLIP** – Image captioning
-- **MiDaS** – Monocular depth estimation
-- **gTTS** – Text-to-speech
-- **Gradio** – Web interface
-- **OpenCV + NumPy** – Image preprocessing
-
-## 📦 How to Run
-Clone the repository:
-```bash
-git clone https://github.com/your-repo/ai-eyes-for-the-blind.git
-```
-
-Install dependencies:
+### 💻 How to Run:
 ```bash
 pip install -r requirements.txt
+python polyvoice_main.py
 ```
 
-Run the app (e.g., in Colab or locally):
+---
+
+## 🔁 Real-Time Communication: Speech ↔ Text Interface
+
+**Real-Time Communication** bridges communication between **deaf or mute individuals and hearing people** by providing an interface to convert speech into text and typed text into speech on the fly.
+
+### 🔧 Key Features:
+- **Speech Recognition (ASR):** Converts speech to text instantly using Whisper or other ASR models.
+- **Text-to-Speech Output:** Converts typed responses into spoken language.
+- **Custom Interfaces:** Font size, color themes, and layout customization for visibility.
+- **Microphone and Speaker Integration:** Designed for real-time conversations.
+
+### 🧑‍🤝‍🧑 Target Audience:
+- People who are deaf, hard of hearing, or mute.
+- Public service desks (banks, clinics) for inclusive communication.
+- Educators and interpreters.
+
+### 🧠 System Workflow:
+```mermaid
+flowchart TD
+    A[Microphone Input] --> B[ASR Engine (Speech-to-Text)]
+    B --> C[Display on Screen]
+    D[Typed Response] --> E[TTS Engine]
+    E --> F[Speaker Output]
+```
+
+### 💻 How to Run:
 ```bash
-python ai_eyes_for_the_blind_google_gemma_3n_impact_challenge.py
+pip install -r requirements.txt
+python real_time_main.py
 ```
 
-## 📋 Requirements
-- Python 3.8+
-- Libraries in `requirements.txt`:
-  - torch
-  - torchvision
-  - transformers
-  - gTTS
-  - gradio
-  - opencv-python
-  - numpy
-  - ultralytics
+---
 
-## 🌐 Demo Video (Coming Soon)
-A YouTube video will showcase real-time detection, narration, and gesture interaction.
+## 🤖 md: AI Assistant for the Blind and Deaf
 
-## 🚀 Future Enhancements
-With potential Google collaboration:
-- Smart glasses integration for seamless user experience
-- Expanded multilingual support (e.g., Persian, Arabic, Spanish, Mandarin, Hindi)
-- Augmented reality for navigation
-- Sign language gesture-to-text via MediaPipe
-- Improved real-time performance to 30 FPS
+**md** (Multi-Disability Assistant) is an intelligent assistant tailored for **both blind and deaf users**. It uses real-time camera input, object detection, OCR, and AI description generation to explain the environment visually or through audio.
 
-## 🙌 Contributing
-Contributions are welcome! Submit pull requests or open issues for improvements or bug fixes.
+### 🔧 Key Features:
+- **Dual Mode (Blind / Deaf):** Select mode on startup based on user needs.
+- **Object Detection:** Uses AI models (YOLO/SSD) to identify people, objects, and obstacles.
+- **Text Recognition (OCR):** Reads and interprets signs, books, handwritten or printed content.
+- **Scene Description:** Describes complex scenes using advanced vision models.
+- **Multi-Output Interface:**
+  - For Blind Users: Audio narration via TTS.
+  - For Deaf Users: On-screen readable text with optional vibration alerts.
 
-## 📧 Contact
-Contact **Mohammad Parham Dehghan** at `dehghanparham6@gmail.com`.
+### 🧑‍🤝‍🧑 Target Audience:
+- Blind or low-vision users seeking contextual feedback.
+- Deaf users who require visual alerts or text summaries.
+- Public assistive installations, wearable devices.
 
-## 🚫 License
-This work is copyright © 2025 by Mohammad Parham Dehghan  
-Licensed under the **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)** license.  
-You are free to:
-- **Share** — copy and redistribute the material in any medium or format  
-Under the following terms:
-- **Attribution** — You must give appropriate credit.
-- **NonCommercial** — You may not use the material for commercial purposes.
-- **NoDerivatives** — If you remix, transform, or build upon the material, you may not distribute the modified material.
+### 🧠 System Workflow:
+```mermaid
+flowchart TD
+    Start[Launch App] --> Mode{Select Mode: Blind or Deaf}
+    Mode -- Blind --> Cam[Capture via Camera] --> Vision[Object/OCR/Scene AI]
+    Vision --> Audio[TTS Voice Output]
+
+    Mode -- Deaf --> Cam2[Capture via Camera] --> Vision2[AI Analysis]
+    Vision2 --> Screen[Text Summary + Visual UI]
+```
+
+### 💻 How to Run:
+```bash
+pip install -r requirements.txt
+python md.py
+```
+
+---
+
+## 📁 Project Structure
+
+```
+ai-accessibility-suite/
+│
+├── polyvoice_main.py         # PolyVoice app
+├── real_time_main.py         # Real-Time Communication tool
+├── md.py                     # md assistant
+├── requirements.txt
+├── README.md
+└── assets/
+    └── screenshots/
+```
+
+---
+
+## 🔐 Accessibility Principles Followed
+
+- **WCAG Compliance:** Designed with high contrast and readable fonts.
+- **Voice-free Interaction:** Fully usable without audio in Deaf Mode.
+- **Large Buttons and Simple UI:** Suitable for low-vision or elderly users.
+- **No Mouse Needed:** All features keyboard accessible.
+
+---
+
+## 📜 License
+
+All content is provided under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)** license.
+
+---
+
+## 💡 Future Features (Planned)
+
+- [ ] Sign language recognition and feedback
+- [ ] Braille printer integration
+- [ ] Mobile app versions for Android/iOS
+- [ ] Cloud data sharing for caregivers
+
+---
+
+## 🙌 Contribution
+
+We welcome contributions from developers, designers, accessibility researchers, and community members. Please submit issues or pull requests on GitHub.
+
+---
+
+> Designed to empower communication for all – regardless of ability. 🌍
+
+
+---
+
+## 👨‍💻 Creator Information
+
+- **Name:** mohammad parham dehghan
+- **Email:** dehghanparham6@gmail.com  
+- **YouTube Channel:** [AI Accessibility Projects & Demos](https://youtube.com)  
+- **GitHub:** [@Parham-Dehghan](https://github.com/Parham-Dehghan)
+
+---
+
+## 📜 License
+
+This project is licensed under:
+
+**Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**  
+You are free to share and adapt the material for non-commercial purposes with proper attribution.
+
+For more information, visit: [creativecommons.org/licenses/by-nc/4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+
+---
