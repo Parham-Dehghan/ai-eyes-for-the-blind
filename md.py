@@ -1060,16 +1060,17 @@ def analyze_input(media, audio_path, language='en', query=None, user_type='blind
             'پاک کردن فایل‌ها': 'پاک کردن فایل‌های قدیمی.'
         }
     }
+
     try:
-        if query and gemma_model and gemma_tokenizer:
-            with torch.no_grad():
-                prompt = f"Interpret this user query for an assistive AI in {language}, extract main command (e.g., 'process video'), and suggest response structure: {query}"
-                inputs = gemma_tokenizer(prompt, return_tensors="pt").to(device)
-                output = gemma_model.generate(**inputs, max_new_tokens=50, temperature=0.7, do_sample=True)
-                command = gemma_tokenizer.decode(output[0][len(inputs.input_ids[0]):], skip_special_tokens=True).lower()
-        else:
-            query = query.lower() if query else ""
-            command = query
+        # Normalize query
+        query = query.lower().strip() if query else ""
+        if query.startswith("md"):
+            query = query[2:].strip()
+        if "greate" in query:
+            query = query.replace("greate", "great")
+        command = query if query in commands[language] else ""
+
+        # Handle GPS coordinates
         latitude = float(user_lat) if user_lat and user_lat != '' else None
         longitude = float(user_lon) if user_lon and user_lon != '' else None
         if latitude is None or longitude is None:
@@ -1083,36 +1084,84 @@ def analyze_input(media, audio_path, language='en', query=None, user_type='blind
             except Exception as e:
                 description += f"GPS retrieval error: {str(e)}. " if language == 'en' else f"خطای دریافت GPS: {str(e)}. "
                 print(f"Geocoder error: {str(e)}")
+
+        # Handle specific commands
         if command in commands[language]:
-            if gemma_model and gemma_tokenizer:
-                with torch.no_grad():
-                    prompt = f"Generate a natural response in {language} for this command in an assistive app: {command}"
-                    inputs = gemma_tokenizer(prompt, return_tensors="pt").to(device)
-                    output = gemma_model.generate(**inputs, max_new_tokens=50, temperature=0.7, do_sample=True)
-                    description += gemma_tokenizer.decode(output[0][len(inputs.input_ids[0]):], skip_special_tokens=True) + " "
-            else:
-                description += commands[language][command] + " "
-        if media:
-            clean_old_files()
-            media_type = media.content_type if hasattr(media, 'content_type') else 'image'
-            if 'video' in media_type:
+            if command in ['read text', 'خواندن متن'] and media:
+                image = Image.open(media.stream if hasattr(media, 'stream') else BytesIO(media.read())).convert('RGB').resize((640, 480))
+                text = extract_text_from_image(image)
+                description += f"Extracted text: {text} " if language == 'en' else f"متن استخراج‌شده: {text} "
+                audio_path = generate_system_audio(text, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, None, None
+
+            elif command in ['detect colors', 'تشخیص رنگ‌ها'] and media:
+                image = Image.open(media.stream if hasattr(media, 'stream') else BytesIO(media.read())).convert('RGB').resize((640, 480))
+                img_array = np.array(image)
+                pixels = img_array.reshape(-1, 3)
+                color_counts = Counter(map(tuple, pixels))
+                dominant_colors = [f"rgb{t}" for t, count in color_counts.most_common(3)]
+                description += f"Dominant colors: {', '.join(dominant_colors)}. " if language == 'en' else f"رنگ‌های غالب: {', '.join(dominant_colors)}. "
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, None, None
+
+            elif command in ['find object', 'پیدا کردن شی'] and media:
+                image = Image.open(media.stream if hasattr(media, 'stream') else BytesIO(media.read())).convert('RGB').resize((640, 480))
+                target_object = query.replace('find object', '').replace('پیدا کردن شی', '').strip()
+                results = yolo_model.predict(image, imgsz=640, conf=0.6)
+                detected_objects = [results[0].names[int(cls)] for cls in results[0].boxes.cls if results[0].boxes.conf.cpu().numpy()[cls] > 0.6]
+                if target_object in detected_objects:
+                    description += f"Found {target_object}. " if language == 'en' else f"{target_object} پیدا شد. "
+                else:
+                    description += f"Object {target_object} not found. " if language == 'en' else f"شیء {target_object} پیدا نشد. "
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, None, None
+
+            elif command in ['save image', 'ذخیره تصویر'] and media:
+                image = Image.open(media.stream if hasattr(media, 'stream') else BytesIO(media.read())).convert('RGB').resize((640, 480))
+                os.makedirs('saved_files', exist_ok=True)
+                saved_file_path = f"saved_files/image_{int(time.time())}.jpg"
+                image.save(saved_file_path, quality=90)
+                base64_file = b64encode(open(saved_file_path, 'rb').read()).decode('utf-8')
+                description += commands[language][command] + f" Image saved at {saved_file_path}. "
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, saved_file_path, base64_file
+
+            elif command in ['save video', 'ذخیره ویدیو'] and media:
+                os.makedirs('saved_files', exist_ok=True)
+                video_path = f"saved_files/video_{int(time.time())}.mp4"
+                media.save(video_path)
+                description += commands[language][command] + f" Video saved at {video_path}. "
+                base64_file = b64encode(open(video_path, 'rb').read()).decode('utf-8')
+                saved_file_path = video_path
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, saved_file_path, base64_file
+
+            elif command in ['process video', 'پردازش ویدیو'] and media:
                 os.makedirs('saved_files', exist_ok=True)
                 video_path = f"saved_files/video_{int(time.time())}.mp4"
                 media.save(video_path)
                 video_description, saved_file_path, base64_file, objects = process_video(video_path, language, user_type)
                 description += video_description
-                if command in ['save video', 'ذخیره ویدیو']:
-                    description += f"Video saved at {saved_file_path}. " if language == 'en' else f"ویدیو در {saved_file_path} ذخیره شد. "
                 if os.path.exists(video_path):
                     os.remove(video_path)
-            else:
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, objects, False, False, "", None, saved_file_path, base64_file
+
+            elif command in ['process image', 'پردازش تصویر', 'describe scene', 'توصیف صحنه', 'detect objects', 'تشخیص اشیا'] and media:
                 image = Image.open(media.stream if hasattr(media, 'stream') else BytesIO(media.read())).convert('RGB').resize((640, 480))
                 image_description, saved_file_path, base64_file, objects = process_image_with_objects(image, language, user_type, query)
                 description += image_description
-                if command in ['save image', 'ذخیره تصویر']:
-                    description += f"Image saved at {saved_file_path}. " if language == 'en' else f"تصویر در {saved_file_path} ذخیره شد. "
-        if query and ("where am i" in command or (language == 'fa' and "من کجا هستم" in command)):
-            try:
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, objects, False, False, "", None, saved_file_path, base64_file
+
+            elif command in ['where am i', 'من کجا هستم']:
                 if latitude is None or longitude is None:
                     description += "GPS coordinates not provided. Please ensure location services are enabled or enter manually. " if language == 'en' else "مختصات GPS ارائه نشده است. لطفاً خدمات موقعیت‌یابی را فعال کنید یا دستی وارد کنید. "
                 else:
@@ -1121,6 +1170,10 @@ def analyze_input(media, audio_path, language='en', query=None, user_type='blind
                         if language == 'en' else
                         f"مختصات تقریبی شما عرض جغرافیایی {latitude:.4f}، طول جغرافیایی {longitude:.4f} است."
                     )
+                    if media:
+                        image = Image.open(media.stream if hasattr(media, 'stream') else BytesIO(media.read())).convert('RGB').resize((640, 480))
+                        image_description, _, _, objects = process_image_with_objects(image, language, user_type, query)
+                        location_description += image_description
                     if objects:
                         location_description += f"Detected {len(objects)} objects: " if language == 'en' else f"{len(objects)} شیء شناسایی شد: "
                         object_counts = Counter([obj['name'] for obj in objects])
@@ -1143,29 +1196,143 @@ def analyze_input(media, audio_path, language='en', query=None, user_type='blind
                     except Exception as e:
                         description += f"GPS calculation error: {str(e)}. " if language == 'en' else f"خطای محاسبه GPS: {str(e)}. "
                         print(f"GPS calculation error: {str(e)}")
-            except Exception as e:
-                description += f"Location processing error: {str(e)}. " if language == 'en' else f"خطای پردازش مکان: {str(e)}. "
-                print(f"Location processing error: {str(e)}")
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, objects, False, False, "", None, None, None
+
+            elif command in ['navigate to', 'ناوبری به']:
+                try:
+                    object_lat = float(request.form.get('object_lat', latitude or 35.1357))
+                    object_lon = float(request.form.get('object_lon', longitude or -121.8269))
+                    distance, direction = calculate_distance(latitude or 35.6895, longitude or 139.6917, object_lat, object_lon)
+                    steps = int(distance / 0.75) if distance is not None else 0
+                    if distance is not None:
+                        description += (
+                            f"Navigate to target at Latitude {object_lat:.4f}, Longitude {object_lon:.4f}, approximately {steps} steps away, heading {direction}. "
+                            if language == 'en' else
+                            f"ناوبری به هدف در عرض جغرافیایی {object_lat:.4f}، طول جغرافیایی {object_lon:.4f}، تقریباً {steps} قدم فاصله، به سمت {direction}. "
+                        )
+                    else:
+                        description += "Unable to calculate navigation path. " if language == 'en' else "نمی‌توان مسیر ناوبری را محاسبه کرد. "
+                    audio_path = generate_system_audio(description, language)
+                    visual_output = description
+                    return description, audio_path, visual_output, [], False, False, "", None, None, None
+                except Exception as e:
+                    description += f"Navigation error: {str(e)}. " if language == 'en' else f"خطای ناوبری: {str(e)}. "
+                    print(f"Navigation error: {str(e)}")
+
+            elif command in ['help', 'کمک']:
+                description += "Available commands: " + ", ".join(commands[language].keys()) + ". "
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, None, None
+
+            elif command in ['switch language', 'تغییر زبان']:
+                new_language = 'fa' if language == 'en' else 'en'
+                description += f"Language switched to {new_language}. " if language == 'en' else f"زبان به {new_language} تغییر یافت. "
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, None, None
+
+            elif command in ['enable alerts', 'فعال کردن هشدارها']:
+                description += "Visual alerts enabled for deaf users. " if language == 'en' else "هشدارهای بصری برای کاربران ناشنوا فعال شد. "
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, None, None
+
+            elif command in ['get coordinates', 'دریافت مختصات']:
+                if latitude is None or longitude is None:
+                    description += "Unable to retrieve GPS coordinates. " if language == 'en' else "نمی‌توان مختصات GPS را دریافت کرد. "
+                else:
+                    description += f"Your coordinates: Latitude {latitude:.4f}, Longitude {longitude:.4f}. " if language == 'en' else f"مختصات شما: عرض جغرافیایی {latitude:.4f}، طول جغرافیایی {longitude:.4f}. "
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, None, None
+
+            elif command in ['clean files', 'پاک کردن فایل‌ها']:
+                clean_old_files()
+                description += "Old files cleaned. " if language == 'en' else "فایل‌های قدیمی پاک شدند. "
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, None, None
+
+            elif command in ['generate subtitles', 'تولید زیرنویس'] and media:
+                os.makedirs('saved_files', exist_ok=True)
+                video_path = f"saved_files/video_{int(time.time())}.mp4"
+                media.save(video_path)
+                subtitles = generate_subtitles(video_path, language)
+                description += f"Subtitles: {subtitles} " if language == 'en' else f"زیرنویس: {subtitles} "
+                if os.path.exists(video_path):
+                    os.remove(video_path)
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, None, None
+
+            elif command in ['get distance', 'دریافت فاصله'] and media:
+                image = Image.open(media.stream if hasattr(media, 'stream') else BytesIO(media.read())).convert('RGB').resize((640, 480))
+                results = yolo_model.predict(image, imgsz=640, conf=0.6)
+                img_array = np.array(image)
+                img_array = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
+                depth_map = None
+                if midas and midas_transform:
+                    img = cv2.cvtColor(img_array, cv2.COLOR_BGR2RGB)
+                    input_batch = midas_transform(img).to(device)
+                    with torch.no_grad():
+                        depth_map = midas(input_batch).cpu().numpy().squeeze()
+                    depth_map = cv2.resize(depth_map, (img_array.shape[1], img_array.shape[0]))
+                for box, cls, conf in zip(results[0].boxes.xyxy.cpu().numpy(), results[0].boxes.cls, results[0].boxes.conf.cpu().numpy()):
+                    if conf > 0.6:
+                        class_name = results[0].names[int(cls)]
+                        dist = estimate_distance(depth_map, box, focal_length=600) if depth_map is not None else "Distance not estimated"
+                        description += f"{class_name} is {dist}. " if language == 'en' else f"{class_name} در {dist} قرار دارد. "
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, None, None
+
+            else:
+                description += commands[language][command] + " "
+                if gemma_model and gemma_tokenizer:
+                    with torch.no_grad():
+                        prompt = f"Generate a natural response in {language} for this command in an assistive app: {command}"
+                        inputs = gemma_tokenizer(prompt, return_tensors="pt").to(device)
+                        output = gemma_model.generate(**inputs, max_new_tokens=50, temperature=0.7, do_sample=True)
+                        description += gemma_tokenizer.decode(output[0][len(inputs.input_ids[0]):], skip_special_tokens=True) + " "
+                audio_path = generate_system_audio(description, language)
+                visual_output = description
+                return description, audio_path, visual_output, [], False, False, "", None, None, None
+
+        # Fallback for unknown queries
         if query and gemma_model and gemma_tokenizer:
-            try:
-                target_query = query.strip().lower()
-                if target_query.startswith("md"):
-                    target_query = target_query[2:].strip()
-                if "greate" in target_query:
-                    target_query = target_query.replace("greate", "great")
-                if not any(key in target_query for key in commands[language]):
-                    prompt = (
-                        f"Provide a clear and concise response in one sentence for {'blind users' if user_type == 'blind' else 'deaf users'} in {language}, interpreting the query as a request for information about the environment or objects, avoiding repetition: {target_query}"
-                        if language == 'en' else
-                        f"یک پاسخ واضح و مختصر در یک جمله برای {'کاربران نابینا' if user_type == 'blind' else 'کاربران ناشنوا'} به {language} ارائه دهید، با تفسیر پرس‌وجو به‌عنوان درخواست اطلاعات درباره محیط یا اشیا، بدون تکرار: {target_query}"
-                    )
-                    inputs = gemma_tokenizer(prompt, return_tensors="pt").to(device)
-                    output = gemma_model.generate(**inputs, max_new_tokens=50, temperature=0.7, do_sample=True, no_repeat_ngram_size=3)
-                    query_response = gemma_tokenizer.decode(output[0][len(inputs.input_ids[0]):], skip_special_tokens=True)
-                    description += f"Response: {query_response}. " if language == 'en' else f"پاسخ: {query_response}. "
-            except Exception as e:
-                description += f"Query processing error: {str(e)}. " if language == 'en' else f"خطای پردازش پرس‌وجو: {str(e)}. "
-                print(f"Query processing error: {str(e)}")
+            prompt = (
+                f"Provide a clear and concise response in one sentence for {'blind users' if user_type == 'blind' else 'deaf users'} in {language}, interpreting the query as a request for information about the environment or objects, avoiding repetition: {query}"
+                if language == 'en' else
+                f"یک پاسخ واضح و مختصر در یک جمله برای {'کاربران نابینا' if user_type == 'blind' else 'کاربران ناشنوا'} به {language} ارائه دهید، با تفسیر پرس‌وجو به‌عنوان درخواست اطلاعات درباره محیط یا اشیا، بدون تکرار: {query}"
+            )
+            inputs = gemma_tokenizer(prompt, return_tensors="pt").to(device)
+            output = gemma_model.generate(**inputs, max_new_tokens=50, temperature=0.7, do_sample=True, no_repeat_ngram_size=3)
+            query_response = gemma_tokenizer.decode(output[0][len(inputs.input_ids[0]):], skip_special_tokens=True)
+            description += f"Response: {query_response}. " if language == 'en' else f"پاسخ: {query_response}. "
+            audio_path = generate_system_audio(description, language)
+            visual_output = description
+            return description, audio_path, visual_output, [], False, False, "", None, None, None
+
+        # Default media processing if no command matches
+        if media:
+            clean_old_files()
+            media_type = media.content_type if hasattr(media, 'content_type') else 'image'
+            if 'video' in media_type:
+                os.makedirs('saved_files', exist_ok=True)
+                video_path = f"saved_files/video_{int(time.time())}.mp4"
+                media.save(video_path)
+                video_description, saved_file_path, base64_file, objects = process_video(video_path, language, user_type)
+                description += video_description
+                if os.path.exists(video_path):
+                    os.remove(video_path)
+            else:
+                image = Image.open(media.stream if hasattr(media, 'stream') else BytesIO(media.read())).convert('RGB').resize((640, 480))
+                image_description, saved_file_path, base64_file, objects = process_image_with_objects(image, language, user_type, query)
+                description += image_description
+
         audio_path = None
         visual_output = description
         if user_type == 'blind':
@@ -1179,11 +1346,14 @@ def analyze_input(media, audio_path, language='en', query=None, user_type='blind
                 audio_path = None
         elif user_type == 'deaf':
             visual_output = f"<div class='bg-blue-100 p-6 rounded-xl shadow-lg text-lg leading-relaxed'>{description}</div>"
+
         return description, audio_path, visual_output, objects, False, False, "", None, saved_file_path, base64_file
+
     except Exception as e:
         print(f"Error in analyze_input: {str(e)}")
         error_msg = f"Error: {str(e)}" if language == 'en' else f"خطا: {str(e)}"
         return error_msg, None, error_msg, [], False, False, "", None, None, None
+
 
 @app.route('/')
 def index():
