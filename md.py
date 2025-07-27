@@ -82,7 +82,7 @@ os.system('mkdir -p /root/.config/ngrok')
 os.system('mv /root/.ngrok2/ngrok.yml /root/.config/ngrok/ngrok.yml || true')
 
 # Set HF token securely
-os.environ["HF_TOKEN"] = "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"
+os.environ["HF_TOKEN"] = "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"
 
 # Flask app
 app = Flask(__name__)
