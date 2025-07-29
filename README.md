@@ -4,6 +4,8 @@
 
 Dive into a vibrant suite of four AI-powered tools designed to break barriers for individuals with **speech**, **hearing**, and **vision** impairments. Each app combines cutting-edge technology with a sleek, animated interface inspired by Bootstrap styling, delivering an engaging and accessible user experience.
 
+![Banner]
+![Banner](assets/icon.jpg)
 ---
 
 ## 🗣️ PolyVoice: Speak Your Words with Flair
@@ -238,5 +240,6 @@ Join our mission! Developers, designers, and accessibility enthusiasts are welco
 ## 📜 License (Repeated for Clarity)
 
 ![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg)
+![License Banner](assets/5782741987810724527%20(3).jpg)
 
 This project is licensed under **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**, with VocalBridge under MIT. Visit [creativecommons.org/licenses/by-nc/4.0](https://creativecommons.org/licenses/by-nc/4.0/) for details.
