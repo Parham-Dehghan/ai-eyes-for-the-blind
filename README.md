@@ -4,7 +4,7 @@
 
 Dive into a vibrant suite of four AI-powered tools designed to break barriers for individuals with **speech**, **hearing**, and **vision** impairments. Each app combines cutting-edge technology with a sleek, animated interface inspired by Bootstrap styling, delivering an engaging and accessible user experience.
 
-![Banner]
+
 ![Banner](assets/icon.jpg)
 ---
 
