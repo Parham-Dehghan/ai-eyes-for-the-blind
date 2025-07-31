@@ -6,6 +6,10 @@
 
 > ⚠️ **Important Notice**: This project is for **personal use only**. Forking, reusing, modifying, or distributing any part of this repository is strictly prohibited and will be pursued under DMCA or license violation claims.
 
+## ⚠️ Trouble Running the Code?
+
+Hit a snag while running the code (e.g., `md.py`, `VocalBridge.ipynb`, `Real Time.ipynb`, `PolyVoice.ipynb`)? No worries! 🙌 Reach out to me at [dehghanparham6@gmail.com](mailto:dehghanparham6@gmail.com), and I’ll share a **Google Colab link** to run the project smoothly in a pre-configured environment. Let’s make accessibility work for everyone—blind, deaf, kids, or general users! 🌈
+
 ---
 ![Banner](assets/icon.jpg)
 
