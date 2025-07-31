@@ -1,3 +1,9 @@
+⚠️ **Important Notice**
+
+This project is for personal use only.  
+You are **not allowed to fork, reuse, modify, or distribute** any part of this repository.  
+Violations will be pursued under DMCA or license violation claims.
+
 # 🧠 AI Accessibility Suite – Empowering Communication with Style
 
 ![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg) ![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen.svg)
