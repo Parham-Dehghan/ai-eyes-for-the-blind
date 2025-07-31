@@ -1,132 +1,68 @@
-⚠️ **Important Notice**
+# 🚀 AI Accessibility Suite – Empowering All with Innovation & Flair
 
-This project is for personal use only.  
-You are **not allowed to fork, reuse, modify, or distribute** any part of this repository.  
-Violations will be pursued under DMCA or license violation claims.
+![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg) ![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen.svg) ![Python](https://img.shields.io/badge/Python-3.11-blue.svg) ![Flask](https://img.shields.io/badge/Flask-2.2.5-orange.svg) ![AI-Powered](https://img.shields.io/badge/AI-Powered-DeepLearning-red.svg)
 
-# 🧠 AI Accessibility Suite – Empowering Communication with Style
+🌟 **Welcome to the AI Accessibility Suite**, a dazzling collection of four AI-driven tools designed to shatter communication barriers for individuals with **speech**, **hearing**, and **vision** impairments. With vibrant, animated interfaces inspired by modern design frameworks like Bootstrap, these apps deliver a seamless, inclusive, and engaging experience. Powered by cutting-edge AI models like YOLOv8, Whisper, and gTTS, this suite is your key to effortless interaction! 🎉
 
-![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg) ![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen.svg)
-
-Dive into a vibrant suite of four AI-powered tools designed to break barriers for individuals with **speech**, **hearing**, and **vision** impairments. Each app combines cutting-edge technology with a sleek, animated interface inspired by Bootstrap styling, delivering an engaging and accessible user experience.
-
-
-![Banner](assets/icon.jpg)
----
-
-## 🗣️ PolyVoice: Speak Your Words with Flair
-
-**PolyVoice** transforms typed text into natural, expressive speech, empowering non-verbal or mute users to communicate effortlessly. With a modern UI featuring smooth animations and vibrant colors, it’s as intuitive as it is powerful.
-
-### 🔧 Key Features
-| Feature | Description | Visual Experience |
-|---------|-------------|-------------------|
-| 🎙️ **Text-to-Speech Conversion** | Turns text into lifelike audio using AI engines (e.g., gTTS, Tortoise). | Smooth `fadeIn` transitions for text input. |
-| 🌍 **Multilingual Support** | Supports global languages and accents. | Dynamic dropdowns with `pulse` animations. |
-| ⚙️ **Custom Voice Settings** | Adjust male/female tones, pitch, and speed. | Interactive sliders with hover effects. |
-| 📴 **Offline Mode** | Works without internet access. | Minimalist offline UI with vibrant feedback. |
-| 😊 **Emotion Synthesis** | Adds emotional tones (e.g., happy, sad). | Animated icons for emotional feedback. |
-
-### 🧑‍🤝‍🧑 Target Audience
-- Mute or speech-impaired individuals (e.g., ALS, stroke, autism).
-- Therapists and caregivers enhancing communication.
-- Users with temporary voice loss.
-
-### 🧠 System Workflow
-```mermaid
-flowchart TD
-    Start[🚀 Launch App] --> Input[✍️ Type Message]
-    Input --> Config[⚙️ Choose Voice Settings]
-    Config --> Process[🔧 Process Text]
-    Process --> Engine[🗣️ Select TTS Engine]
-    Engine --> Output[🔊 Play Audio with Animation]
-    Output -->|🔄 Tweak Settings| Config
-```
-
-**Flowchart Description**: PolyVoice’s flowchart is a lively, linear diagram with a feedback loop, rendered top-down with emoji-enhanced nodes. It kicks off with "Launch App," flows to "Type Message," "Choose Voice Settings," "Process Text," "Select TTS Engine," and ends at "Play Audio with Animation." A dashed "Tweak Settings" arrow loops back, styled with rounded corners and vibrant colors for a modern vibe.
-
-### 💻 How to Run
-```bash
-pip install -r requirements.txt
-python polyvoice_main.py
-```
+> ⚠️ **Important Notice**: This project is for **personal use only**. Forking, reusing, modifying, or distributing any part of this repository is strictly prohibited and will be pursued under DMCA or license violation claims.
 
 ---
 
-## 🔁 Real-Time Communication: Connect Instantly with Style
+## 🎯 What’s the Mission?
 
-**Real-Time Communication** bridges the gap between deaf, mute, and hearing individuals with a dynamic speech-to-text and text-to-speech interface, wrapped in a Bootstrap-inspired UI with fluid animations.
+The AI Accessibility Suite harnesses advanced AI to empower users with disabilities, offering intuitive tools for navigation, communication, and environmental awareness. Each app adheres to **WCAG accessibility standards**, featuring dynamic animations (`fadeIn`, `pulse`), high-contrast designs, and multilingual support. Whether it’s real-time obstacle detection or speech-to-text transcription, we’re here to make the world more accessible with style! 🌍
 
-### 🔧 Key Features
-| Feature | Description | Visual Experience |
-|---------|-------------|-------------------|
-| 🎤 **Speech Recognition (ASR)** | Instantly converts speech to text via Whisper or other ASR models. | Real-time text display with `pulse` animation. |
-| 🗣️ **Text-to-Speech Output** | Transforms typed responses into speech. | Smooth `fadeIn` for audio playback. |
-| 🎨 **Custom Interfaces** | Adjustable fonts, themes, and layouts. | Bootstrap-styled layouts with hover effects. |
-| 🔊 **Microphone & Speaker Integration** | Built for seamless conversations. | Animated mic icons for active recording. |
-
-### 🧑‍🤝‍🧑 Target Audience
-- Deaf, hard-of-hearing, or mute individuals.
-- Public service desks (banks, clinics) for inclusive interaction.
-- Educators and interpreters.
-
-### 🧠 System Workflow
-```mermaid
-flowchart TD
-    Start[🚀 Start Chat] --> Config[🎨 Customize UI]
-    Config --> Mic[🎤 Record Audio]
-    Mic --> ASR[🗣️ Speech-to-Text]
-    ASR --> Display[🖼️ Show Text with Animation]
-    Display --> Type[✍️ Type Response]
-    Type --> TTS[🔊 Text-to-Speech]
-    TTS --> Speaker[🔊 Play Audio]
-    Speaker -->|🔄 Continue Chat| Mic
-```
-
-**Flowchart Description**: This cyclical flowchart bursts with energy, rendered top-down with emoji-driven nodes. It starts with "Start Chat," flows to "Customize UI," "Record Audio," "Speech-to-Text," "Show Text with Animation," "Type Response," "Text-to-Speech," and "Play Audio." A dashed "Continue Chat" arrow loops back, styled with vibrant, rounded nodes for a dynamic feel.
-
-### 💻 How to Run
-```bash
-pip install -r requirements.txt
-python real_time_main.py
-```
+| App | Purpose | Key Tech | Target Users |
+|-----|---------|----------|--------------|
+| 🧠 **md** | Multi-disability assistant with object detection, OCR, and navigation | YOLOv8, BLIP, Whisper, MiDaS, Doctr, Gemma-2b | Blind, Deaf |
+| 🎙️ **VocalBridge** | Real-time speech-to-text transcription | Whisper, Flask-SocketIO, librosa | Deaf, Hard-of-Hearing |
+| 🔁 **Real-Time Obstacle Detection** | Live obstacle alerts via webcam | YOLO-World, SocketIO | Blind, Low-Vision |
+| 🗣️ **PolyVoice** | Multilingual text-to-speech conversion | gTTS | Mute, Speech-Impaired |
 
 ---
 
-## 🤖 md: Your AI Guide for Blind and Deaf Users
+## 🧠 The Apps: Your Accessibility Champions
 
-**md** (Multi-Disability Assistant) empowers blind and deaf users with real-time environmental insights via camera input, object detection, and OCR, delivered through a sleek, animated interface.
+### 1. 🧠 **md: Your AI Companion for Blind & Deaf Users**
 
-### 🔧 Key Features
-| Feature | Description | Visual Experience |
-|---------|-------------|-------------------|
-| 🌐 **Dual Mode (Blind/Deaf)** | Choose mode based on user needs. | Animated mode selector with `fadeIn`. |
-| 🔍 **Object Detection** | Identifies people, objects, and obstacles using YOLO/SSD. | Real-time visual overlays with hover effects. |
-| 📜 **Text Recognition (OCR)** | Reads signs, books, and handwritten text. | Smooth text display with `pulse` animation. |
-| 🖼️ **Scene Description** | Describes complex scenes with AI vision. | Dynamic descriptions with Bootstrap styling. |
-| 🔊 **Multi-Output Interface** | Audio for blind; text/vibration for deaf. | Vibrant UI with animated feedback. |
+**md** (Multi-Disability Assistant) is a versatile assistant that transforms environmental data into accessible insights. It uses camera input for object detection, text recognition, and scene description, delivering audio for blind users and visual/haptic feedback for deaf users, all wrapped in a stunning UI.
 
-### 🧑‍🤝‍🧑 Target Audience
-- Blind or low-vision users seeking environmental context.
-- Deaf users needing visual or haptic feedback.
-- Public assistive systems and wearable devices.
+#### ✨ Key Features
+- 🌐 **Dual Mode**: Blind (audio output) or Deaf (visual/vibration) modes.
+- 🔍 **Object Detection**: Identifies objects and obstacles using YOLOv8 (confidence > 0.6).
+- 📜 **OCR**: Extracts text from images with Doctr and Tesseract.
+- 🖼️ **Scene Description**: Generates detailed captions with BLIP, refined by Gemma-2b.
+- 📍 **GPS Navigation**: Calculates distance and direction using geocoder and Haversine formula.
+- 📏 **Depth Estimation**: Estimates object distances with MiDaS.
+- 🎨 **Dynamic UI**: Animated `fadeIn` selectors, `pulse` text displays, and Tailwind CSS styling.
 
-### 🧠 System Workflow
+#### 🎯 Target Audience
+- Blind or low-vision users needing environmental context.
+- Deaf users requiring visual or haptic feedback.
+- Caregivers, public assistive systems, and wearable tech integrations.
+
+#### 🧠 System Workflow
 ```mermaid
-flowchart TD
-    Start[🚀 Launch App] --> Mode{🌐 Blind or Deaf?}
-    Mode -->|Blind| Cam[📸 Capture Scene]
-    Mode -->|Deaf| Cam
-    Cam --> Vision[🔍 AI Analysis]
-    Vision -->|Blind| Audio[🔊 TTS Audio Output]
-    Vision -->|Deaf| Output[🖼️ Text + Animated UI]
-    Output -->|🔄 Feedback| Cam
-    Audio -->|🔄 Feedback| Cam
+graph TD
+    A[🚀 Launch App] --> B{🌐 Blind or Deaf?}
+    B -->|Blind| C[📸 Capture Image/Video]
+    B -->|Deaf| C
+    C --> D[🔍 AI Analysis]
+    D --> D1[🔎 Object Detection: YOLOv8]
+    D --> D2[📜 OCR: Doctr]
+    D --> D3[🖼️ Scene Caption: BLIP]
+    D --> D4[📏 Depth Estimation: MiDaS]
+    D --> D5[📍 GPS Navigation]
+    D1 & D2 & D3 & D4 & D5 --> E[🔧 Refine with Gemma-2b]
+    E -->|Blind| F[🔊 TTS Audio Output]
+    E -->|Deaf| G[🖼️ Text + Vibration + Animated UI]
+    F -->|🔄 Feedback| C
+    G -->|🔄 Feedback| C
 ```
 
-**Flowchart Description**: The md flowchart is a branching masterpiece, rendered top-down with a decision node and parallel paths. It starts with "Launch App," hits a diamond-shaped "Blind or Deaf?" node, then branches to a shared "Capture Scene" node, flowing to "AI Analysis." The "Blind" path leads to "TTS Audio Output," and the "Deaf" path to "Text + Animated UI." Dashed "Feedback" arrows loop back, styled with vibrant emojis and modern aesthetics.
+**Flowchart Description**: A branching flowchart with a decision node, showcasing md’s multifaceted capabilities. It starts with "Launch App," branches at "Blind or Deaf?" to "Capture Image/Video," then flows to parallel AI analysis nodes: "Object Detection," "OCR," "Scene Caption," "Depth Estimation," and "GPS Navigation." Results are refined with Gemma-2b, leading to "TTS Audio Output" (Blind) or "Text + Vibration + Animated UI" (Deaf). Dashed feedback loops ensure continuous interaction, styled with vibrant emojis and rounded nodes.
 
-### 💻 How to Run
+#### 💻 How to Run
 ```bash
 pip install -r requirements.txt
 python md.py
@@ -134,38 +70,36 @@ python md.py
 
 ---
 
-## 🎙️ VocalBridge: Speech-to-Text with a Modern Twist
+### 2. 🎙️ **VocalBridge: Speech-to-Text with Elegance**
 
-**VocalBridge** delivers real-time speech-to-text transcription for deaf or hard-of-hearing users, wrapped in a stunning web-based UI with Bootstrap-inspired styling, `fadeIn` transitions, and `pulse` animations for a lively experience.
+**VocalBridge** offers real-time speech-to-text transcription for deaf or hard-of-hearing users. Powered by Whisper, it supports multiple languages and features a sleek, web-based UI with dynamic animations.
 
-### 🔧 Key Features
-| Feature | Description | Visual Experience |
-|---------|-------------|-------------------|
-| 🎤 **Real-Time Speech Recognition** | Converts audio to text using Whisper. | Real-time text with `pulse` loading animation. |
-| 🌍 **Multilingual Support** | Supports English, Persian, Arabic, and more. | Dynamic LTR/RTL text with `fadeIn` transitions. |
-| 🎨 **Dynamic Interface** | Bootstrap-styled layouts with LTR/RTL support. | Hover effects and vibrant color schemes. |
-| 🔧 **Audio Preprocessing** | Handles WebM/WAV with resampling. | Seamless processing with animated feedback. |
-| 🌐 **Web-Based Access** | Runs via Flask and ngrok. | Modern UI with responsive design. |
+#### ✨ Key Features
+- 🎤 **Real-Time Transcription**: Converts audio to text using Whisper (`base` model).
+- 🌍 **Multilingual Support**: Persian, English, Arabic, French, German, Italian, Russian, Spanish.
+- 🔧 **Audio Preprocessing**: Handles WebM/WAV formats with 16kHz resampling via librosa.
+- 🎨 **Vibrant UI**: `pulse` loading animations, `fadeIn` transitions, and RTL/LTR support with Bootstrap-inspired styling.
+- 🌐 **Web Access**: Runs via Flask-SocketIO and ngrok for global accessibility.
 
-### 🧑‍🤝‍🧑 Target Audience
+#### 🎯 Target Audience
 - Deaf or hard-of-hearing individuals needing instant transcription.
-- Multilingual settings requiring language-specific text.
-- Public service environments (e.g., customer service, education).
+- Multilingual settings (e.g., customer service, education).
+- Public service environments requiring real-time text output.
 
-### 🧠 System Workflow
+#### 🧠 System Workflow
 ```mermaid
-flowchart TD
-    Start[🚀 Launch App] --> Config[🌍 Choose Language]
-    Config --> Record[🎤 Record Audio]
-    Record --> Preprocess[🔧 Process Audio]
-    Preprocess --> ASR[🗣️ Convert to Text]
-    ASR --> Display[🖼️ Show Text with Animation]
-    Display -->|🔄 Continue| Record
+graph TD
+    A[🚀 Launch App] --> B[🌍 Select Language]
+    B --> C[🎤 Record Audio via MediaRecorder]
+    C --> D[🔧 Preprocess Audio: WebM to WAV]
+    D --> E[🗣️ Transcribe: Whisper]
+    E --> F[🖼️ Display Text with Pulse Animation]
+    F -->|🔄 Continue| C
 ```
 
-**Flowchart Description**: VocalBridge’s cyclical flowchart radiates energy, rendered top-down with emoji-enhanced nodes. It starts with "Launch App," flows to "Choose Language," "Record Audio," "Process Audio," "Convert to Text," and "Show Text with Animation." A dashed "Continue" arrow loops back, styled with vibrant colors and rounded nodes for a modern, animated vibe.
+**Flowchart Description**: A cyclical flowchart highlighting VocalBridge’s streamlined process. It starts with "Launch App," flows to "Select Language," "Record Audio," "Preprocess Audio," "Transcribe," and "Display Text with Pulse Animation." A dashed "Continue" loop ensures ongoing transcription, styled with vibrant emojis, rounded nodes, and a modern aesthetic.
 
-### 💻 How to Run
+#### 💻 How to Run
 ```bash
 pip install flask==2.2.5 flask-socketio==5.3.6 eventlet==0.36.1 pyngrok==7.2.0
 pip install git+https://github.com/openai/whisper.git
@@ -173,79 +107,147 @@ pip install soundfile==0.13.1 pydub==0.25.1 librosa==0.10.2
 apt-get install -y ffmpeg
 python vocalbridge.py
 ```
+> **Note**: Requires an ngrok auth token from [ngrok.com](https://ngrok.com).
 
-**Note**: Requires an ngrok authentication token for public URL access. Grab your token from [ngrok](https://ngrok.com) and update the code.
+---
 
-**License Note**: VocalBridge code is licensed under the MIT License for maximum flexibility, while the rest of the suite follows CC BY-NC 4.0.
+### 3. 🔁 **Real-Time Obstacle Detection: Navigate with Confidence**
+
+**Real-Time Obstacle Detection** empowers blind users with live webcam-based obstacle alerts. Using YOLO-World, it detects objects, estimates distances, and delivers Persian audio alerts with vibration feedback for mobile devices.
+
+#### ✨ Key Features
+- 🔍 **Obstacle Detection**: Identifies objects (e.g., stairs, people, cars) with YOLO-World (`yolov8x-worldv2.pt`, confidence > 0.7).
+- 📏 **Distance Estimation**: Calculates steps to obstacles based on bounding box size.
+- 🔊 **Audio Alerts**: Client-side speech synthesis in Persian/English.
+- 📱 **Mobile-Friendly**: Supports front/rear camera toggle and vibration alerts.
+- 🎥 **Video Recording**: Saves annotated videos for review.
+- 🎨 **Dynamic UI**: `fadeIn` transitions and high-contrast design.
+
+#### 🎯 Target Audience
+- Blind or low-vision users navigating environments.
+- Caregivers and assistive technology integrators.
+
+#### 🧠 System Workflow
+```mermaid
+graph TD
+    A[🚀 Start App] --> B[📸 Start Webcam]
+    B --> C[🔍 Detect Objects: YOLO-World]
+    C --> D[📏 Estimate Distance]
+    C --> E[🎥 Annotate Frame]
+    D --> F[🔊 Generate Audio Alert: SpeechSynthesis]
+    D --> G[📱 Vibration for Dangerous Objects]
+    E --> H[💾 Save Video]
+    F & G & H -->|🔄 Continue| B
+```
+
+**Flowchart Description**: A cyclical flowchart showcasing real-time processing. It starts with "Start App," flows to "Start Webcam," "Detect Objects," and branches to "Estimate Distance," "Annotate Frame," "Generate Audio Alert," "Vibration for Dangerous Objects," and "Save Video." A dashed "Continue" loop ensures ongoing detection, styled with vibrant emojis and modern nodes.
+
+#### 💻 How to Run
+```bash
+pip install -r requirements.txt
+python real_time_main.py
+```
+
+---
+
+### 4. 🗣️ **PolyVoice: Speak Your Words with Flair**
+
+**PolyVoice** transforms text into natural speech, enabling mute or speech-impaired users to communicate effortlessly. Its vibrant UI supports multiple languages and speed settings.
+
+#### ✨ Key Features
+- 🎙️ **Text-to-Speech**: Converts text to audio using gTTS.
+- 🌍 **Multilingual Support**: Persian, English, Arabic, French, German, Italian, Russian, Spanish.
+- ⚙️ **Speed Control**: Normal or slow speech options.
+- 🎨 **Vibrant UI**: `fadeIn` transitions, `pulse` animations, and RTL/LTR support with Bootstrap-inspired styling.
+- 🌐 **Web Access**: Runs via Flask and ngrok.
+
+#### 🎯 Target Audience
+- Mute or speech-impaired individuals (e.g., ALS, stroke, autism).
+- Therapists, caregivers, and users with temporary voice loss.
+
+#### 🧠 System Workflow
+```mermaid
+graph TD
+    A[🚀 Launch App] --> B[✍️ Type Text]
+    B --> C[🌍 Select Language]
+    C --> D[⚙️ Choose Speed: Normal/Slow]
+    D --> E[🔧 Process Text: gTTS]
+    E --> F[🔊 Play Audio with FadeIn Animation]
+    F -->|🔄 Tweak Settings| C
+```
+
+**Flowchart Description**: A linear flowchart with a feedback loop, starting with "Launch App," flowing to "Type Text," "Select Language," "Choose Speed," "Process Text," and "Play Audio with FadeIn Animation." A dashed "Tweak Settings" loop allows adjustments, styled with vibrant emojis and rounded nodes.
+
+#### 💻 How to Run
+```bash
+pip install -r requirements.txt
+python polyvoice_main.py
+```
 
 ---
 
 ## 📁 Project Structure
 
-```
+```plaintext
 ai-accessibility-suite/
-│
-├── polyvoice_main.py         # PolyVoice app
-├── real_time_main.py         # Real-Time Communication tool
-├── md.py                     # md assistant
-├── vocalbridge.py            # VocalBridge speech-to-text app
-├── requirements.txt
-├── README.md
-└── assets/
+├── md.py                     # Multi-Disability Assistant
+├── vocalbridge.py            # Speech-to-Text App
+├── real_time_main.py         # Real-Time Obstacle Detection
+├── polyvoice_main.py         # Text-to-Speech App
+├── requirements.txt          # Dependencies
+├── README.md                 # This file
+└── assets/                   # Images and screenshots
     └── screenshots/
 ```
 
 ---
 
-## 🔐 Accessibility Principles Followed
+## 🔐 Accessibility Principles
 
-- **WCAG Compliance**: High-contrast, Bootstrap-inspired design with readable fonts.
-- **Voice-Free Interaction**: Fully functional without audio for deaf users.
-- **Intuitive UI**: Large buttons, animated feedback, and responsive layouts.
-- **Keyboard Accessibility**: Navigate effortlessly without a mouse.
+- ✅ **WCAG Compliance**: High-contrast, readable fonts, and Tailwind/Bootstrap-inspired design.
+- ✅ **Voice-Free Interaction**: Fully functional for deaf users without audio reliance.
+- ✅ **Intuitive UI**: Large buttons, animated feedback (`fadeIn`, `pulse`), and responsive layouts.
+- ✅ **Keyboard Navigation**: Seamless control without a mouse for accessibility.
+- ✅ **Haptic Feedback**: Vibration alerts for deaf users in md and Real-Time apps.
+
+---
+
+## 🔮 Future Features
+
+- [ ] **Sign Language Recognition**: Animated feedback for deaf users.
+- [ ] **Braille Integration**: Support for Braille printers.
+- [ ] **Mobile Apps**: Native Android/iOS apps with vibrant UIs.
+- [ ] **Cloud Sharing**: Data sharing for caregivers and therapists.
+- [ ] **Emotion Synthesis**: Add emotional tones to PolyVoice (e.g., happy, sad).
+- [ ] **Advanced OCR**: Support for handwritten text in multiple languages.
 
 ---
 
 ## 📜 License
 
-![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg)
-
-This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**, except for VocalBridge, which uses the MIT License. Share and adapt for non-commercial purposes with proper attribution.
-
+![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg)  
+This project is licensed under **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**, except for **VocalBridge**, which uses the **MIT License**. Share and adapt for non-commercial use with proper attribution.  
 🔗 [License Details](https://creativecommons.org/licenses/by-nc/4.0/)
 
 ---
 
-## 💡 Future Features (Planned)
+## 🙌 Get Involved!
 
-- [ ] Sign language recognition with animated feedback
-- [ ] Braille printer integration
-- [ ] Mobile apps for Android/iOS with vibrant UIs
-- [ ] Cloud data sharing for caregivers
+We’re passionate about making communication accessible for all! Developers, designers, and accessibility enthusiasts are invited to share ideas or report issues on [GitHub](https://github.com/Parham-Dehghan). Let’s build a more inclusive world together! 🌍
 
 ---
 
-## 🙌 Contribution
+## 👨‍💻 Meet the Creator
 
-Join our mission! Developers, designers, and accessibility enthusiasts are welcome to submit issues or pull requests on [GitHub](https://github.com/Parham-Dehghan).
-
-> **Empowering communication for all with style and accessibility.** 🌍
-
----
-
-## 👨‍💻 Creator Information
-
-| Name | Mohammad Parham Dehghan |
-|------|-------------------------|
-| **Email** | dehghanparham6@gmail.com |
-| **YouTube** | [AI Accessibility Projects & Demos](https://www.youtube.com/@dehghanparham6) |
-| **GitHub** | [@Parham-Dehghan](https://github.com/Parham-Dehghan) |
+| **Name** | Mohammad Parham Dehghan |
+|----------|-------------------------|
+| 📧 **Email** | dehghanparham6@gmail.com |
+| 🎥 **YouTube** | [AI Accessibility Projects & Demos](https://www.youtube.com/@dehghanparham6) |
+| 🧑‍💻 **GitHub** | [@Parham-Dehghan](https://github.com/Parham-Dehghan) |
 
 ---
 
-## 📜 License (Repeated for Clarity)
+## 🌟 Why This Matters
 
-![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg)
-![License Banner](assets/5782741987810724527%20(3).jpg)
-
-This project is licensed under **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**, with VocalBridge under MIT. Visit [creativecommons.org/licenses/by-nc/4.0](https://creativecommons.org/licenses/by-nc/4.0/) for details.
+> **Empowering communication with innovation, accessibility, and style.**  
+This suite is more than code—it’s a bridge to connection, independence, and inclusion. Join us in creating a world where everyone can communicate freely! 💪
