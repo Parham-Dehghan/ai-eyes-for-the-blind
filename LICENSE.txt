@@ -1,25 +1,50 @@
-Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+AI Accessibility Suite License
+=============================
 
-Copyright (c) 2025 Mohammad Parham Dehghaneh
+🌟 Welcome to the AI Accessibility Suite! 🌟
+This vibrant project, designed to empower everyone—blind, deaf, motor-impaired, cognitively impaired, kids, and general users—is a celebration of inclusion and innovation. To keep this mission alive, please respect the following license terms! 🚀
+
+Copyright © 2025 Mohammad Parham Dehghan
+
+Primary License: Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+---------------------------------------------------------------------------------------
+Except for VocalBridge, which is licensed under the MIT License, this project is governed by the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license.
 
 You are free to:
-
-- Share — copy and redistribute the material in any medium or format
+- 📖 Share: Copy and redistribute the material in any medium or format.
 
 Under the following terms:
+- 👏 Attribution: You must give appropriate credit to Mohammad Parham Dehghan, provide a link to the license (https://creativecommons.org/licenses/by-nc/4.0/), and indicate if changes were made. Do so reasonably, but not in a way that suggests endorsement.
+- 🚫 NonCommercial: You may not use the material for commercial purposes, including commercial products, services, or consulting.
+- 🔒 Restricted Uses:
+  - No AI Training: This project (e.g., md.py, Real Time.ipynb, PolyVoice.ipynb) or its components may not be used in AI training datasets, machine learning models, or generative tools (e.g., LLMs, diffusion models).
+  - No Academic or Student Projects: Use in academic assignments, student projects, or research is prohibited without explicit permission.
+  - No Commercial Consulting: Use in consulting settings, even with attribution, is not allowed.
+- ⚠️ No Warranties: The license does not grant all permissions needed for your intended use. Additional permissions may be required.
 
-- Attribution — You must give appropriate credit.
-- NonCommercial — You may not use the material for commercial purposes.
-- NoDerivatives — If you remix, transform, or build upon the material, you may not distribute the modified material.
-- AI Use Restriction — This project or its components may not be used in AI training datasets, machine learning models, or generative tools (e.g., LLMs, diffusion models).
-- This material may not be used in academic assignments, student projects, or commercial consulting, even with attribution.
+VocalBridge License: MIT License
+-------------------------------
+VocalBridge (vocalbridge.py) is licensed under the MIT License, allowing more flexible use, including modification and distribution, as long as the MIT License terms are followed. See https://opensource.org/licenses/MIT for details.
 
-No warranties are given. The license may not give you all of the permissions necessary for your intended use.
+Consequences of Unauthorized Use
+--------------------------------
+Any unauthorized use, forking, or distribution is a breach of license and may result in:
+- 📜 DMCA Takedown: A formal request to GitHub or other platforms to remove unauthorized forks, clones, or distributions.
+- ⚖️ Legal Action: Enforcement of copyright to protect the project’s integrity.
 
-Any unauthorized use, fork, or distribution may be subject to legal action under the Digital Millennium Copyright Act (DMCA).
+Let’s keep accessibility vibrant and respectful! 😊
 
-📬 For special permission or licensing inquiries, contact: dehghanparham6@gmail.com
+Need Special Permission? Let’s Connect!
+--------------------------------------
+For specific use cases (e.g., educational demos, non-commercial accessibility advocacy, research), contact the creator for written permission:
+- Owner: Mohammad Parham Dehghan
+- 📧 Email: dehghanparham6@gmail.com
+- 🎥 YouTube: https://www.youtube.com/@dehghanparham6
+- 🧑‍💻 GitHub: https://github.com/Parham-Dehghan
 
-View the full license at:
-https://creativecommons.org/licenses/by-nc-nd/4.0/
+Why This Matters
+---------------
+This project is about empowering everyone—blind, deaf, motor-impaired, cognitively impaired, kids, and general users—with tools that make the world more accessible. By respecting this license, you’re helping us keep accessibility inclusive and impactful! 💖
 
+View the full CC BY-NC 4.0 license at: https://creativecommons.org/licenses/by-nc/4.0/
+View the MIT License at: https://opensource.org/licenses/MIT
