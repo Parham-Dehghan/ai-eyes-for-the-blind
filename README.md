@@ -7,6 +7,7 @@
 > ⚠️ **Important Notice**: This project is for **personal use only**. Forking, reusing, modifying, or distributing any part of this repository is strictly prohibited and will be pursued under DMCA or license violation claims.
 
 ---
+![Banner](assets/icon.jpg)
 
 ## 🎯 Our Mission
 
@@ -287,7 +288,8 @@ The AI Accessibility Suite is set to redefine assistive technology with cutting-
 
 ## 📜 License
 
-![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg)  
+![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg)
+![License Banner](assets/5782741987810724527%20(3).jpg)
 This project is licensed under **Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)**, except for **VocalBridge**, which uses the **MIT License**. Share and adapt for non-commercial use with proper attribution.  
 🔗 [License Details](https://creativecommons.org/licenses/by-nc/4.0/)
 
