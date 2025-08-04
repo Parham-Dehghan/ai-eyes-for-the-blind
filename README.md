@@ -123,43 +123,49 @@ python vocalbridge.py
 
 ---
 
-### 3. 🔁 **Real-Time Obstacle Detection: Navigate with Confidence**
+## 🔁 Real-Time Obstacle Detection: Navigate with Confidence
 
-**Real-Time Obstacle Detection** empowers blind, low-vision, or general users with live webcam-based obstacle alerts. Using YOLO-World, it detects objects, estimates distances, and delivers Persian audio alerts with vibration feedback for mobile devices.
+**Real-Time Obstacle Detection** empowers visually impaired users by detecting obstacles in real-time using a webcam and YOLO-World, delivering alerts through audio, text, and haptic feedback. The tool features a Bootstrap-inspired, responsive web interface with fluid `pulse` and `fadeIn` animations for an engaging and accessible experience.
 
-#### ✨ Key Features
-- 🔍 **Obstacle Detection**: Identifies objects (e.g., stairs, people, cars) with YOLO-World (`yolov8x-worldv2.pt`, confidence > 0.7).
-- 📏 **Distance Estimation**: Calculates steps to obstacles based on bounding box size.
-- 🔊 **Audio Alerts**: Client-side speech synthesis in Persian/English via SpeechSynthesis.
-- 📱 **Mobile-Friendly**: Front/rear camera toggle and vibration alerts for dangerous objects.
-- 🎥 **Video Recording**: Saves annotated videos for review.
-- 🎨 **Dynamic UI**: `fadeIn` transitions and high-contrast design.
+### 🔧 Key Features
+| Feature | Description | Visual Experience |
+|---------|-------------|-------------------|
+| 🔍 **Real-Time Object Detection** | Identifies obstacles (e.g., people, stairs, poles) using YOLO-World. | Annotated video feed with red bounding boxes and `pulse` animations. |
+| 🗣️ **Audio Alerts** | Provides spoken warnings with customizable volume for dangerous objects. | Smooth `fadeIn` text display for alert status. |
+| 📳 **Haptic Feedback** | Triggers device vibration for dangerous obstacles (e.g., stairs, sharp objects). | Subtle UI feedback with animated status updates. |
+| 🎨 **Customizable Interface** | Responsive, high-contrast UI with Bootstrap styling and RTL support. | Hover effects and vibrant buttons for accessibility. |
+| 📹 **Video Recording** | Saves annotated video output for later review. | Seamless integration with animated UI feedback. |
 
-#### 🎯 Target Audience
-- Blind or low-vision users navigating environments.
-- General users seeking real-time environmental analysis.
-- Caregivers and assistive technology integrators.
+### 🧑‍🤝‍🧑 Target Audience
+- Visually impaired individuals needing real-time environmental awareness.
+- Caregivers and accessibility professionals supporting navigation.
+- Public assistive systems in environments like transit hubs or offices.
 
-#### 🧠 System Workflow
+### 🧠 System Workflow
 ```mermaid
-graph TD
-    A[🚀 Start App] --> B[📸 Start Webcam: User/Environment]
-    B --> C[🔍 Detect Objects: YOLO-World]
-    C --> D[📏 Estimate Distance]
-    C --> E[🎥 Annotate Frame with Bounding Boxes]
-    D --> F[🔊 Generate Audio Alert: SpeechSynthesis]
-    D --> G[📱 Vibration for Dangerous Objects]
-    E --> H[💾 Save Video: MP4]
-    F & G & H -->|🔄 Continue| B
+flowchart TD
+    Start[🚀 Launch App] --> Stream[📹 Start Webcam Stream]
+    Stream --> Capture[🖼️ Capture Frame]
+    Capture --> Detect[🔍 YOLO Object Detection]
+    Detect --> Annotate[✍️ Annotate Frame with Bounding Boxes]
+    Annotate --> Alert{⚠️ Obstacle Detected?}
+    Alert -->|Yes| Notify[🔊 Audio/Haptic Alert]
+    Alert -->|No| Display[🖼️ Show Annotated Frame]
+    Notify --> Display
+    Display -->|🔄 Continue| Capture
 ```
 
-**Flowchart Description**: A cyclical flowchart highlighting real-time processing. It starts with "Start App," flows to "Start Webcam," "Detect Objects," and branches to "Estimate Distance," "Annotate Frame," "Generate Audio Alert," "Vibration for Dangerous Objects," and "Save Video." A dashed "Continue" loop ensures ongoing detection, styled with vibrant emojis and modern nodes.
+**Flowchart Description**: This cyclical flowchart, rendered top-down with emoji-enhanced nodes, starts with "Launch App," flows to "Start Webcam Stream," "Capture Frame," "YOLO Object Detection," "Annotate Frame with Bounding Boxes," and checks "Obstacle Detected?" If yes, it triggers "Audio/Haptic Alert"; if no, it proceeds to "Show Annotated Frame." A dashed "Continue" arrow loops back to "Capture Frame," styled with vibrant, rounded nodes for a dynamic feel.
 
-#### 💻 How to Run
+### 💻 How to Run
 ```bash
-pip install -r requirements.txt
+pip install flask==2.0.1 flask-socketio==5.3.6 eventlet==0.33.3 opencv-python-headless ultralytics gtts pyngrok requests
+pip install werkzeug==2.0.3 --force-reinstall
+apt-get update && apt-get install -y libasound2-dev portaudio19-dev libportaudio2 libportaudiocpp0 ffmpeg
 python real_time_main.py
 ```
+
+**Note**: Requires an ngrok authentication token for public URL access. Set `NGROK_TOKEN` environment variable or update the code with your token from [ngrok](https://ngrok.com).
 
 ---
 
