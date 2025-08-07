@@ -4,6 +4,8 @@
 
 🌟 **Welcome to the AI Accessibility Suite**, a vibrant collection of four AI-powered tools designed to break communication and navigation barriers for **all users**, including those with **speech**, **hearing**, and **vision** impairments, as well as general users seeking intuitive assistive technology. With sleek, animated interfaces inspired by Tailwind and Bootstrap, these apps deliver an inclusive, engaging, and cutting-edge experience. Powered by advanced AI models like YOLOv8, Whisper, and gTTS, this suite is your gateway to seamless interaction! 🎉
 
+Designed with future deployment in mind, including APK/IPA targets, wearable integration, and full Gemma 3n compatibility.
+
 > ⚠️ **Important Notice**: This project is for **personal use only**. Forking, reusing, modifying, or distributing any part of this repository is strictly prohibited and will be pursued under DMCA or license violation claims.
 
 ## ⚠️ Trouble Running the Code?
